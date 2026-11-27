@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Cat Break Reminder",
+  "version": "0.2.0",
+  "description": "An animated cat appears on the active tab to remind you to take a break.",
+  "permissions": ["alarms", "storage", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "icons": {
+    "16": "assets/nekoicon16.png",
+    "48": "assets/nekoicon48.png",
+    "128": "assets/nekoicon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Cat Break Reminder",
+    "default_icon": {
+      "16": "assets/nekoicon16.png",
+      "48": "assets/nekoicon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/neko1.webm", "assets/neko1_palindrome.webm", "assets/neko2.webm"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

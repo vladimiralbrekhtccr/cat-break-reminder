@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        width: 280px;
+        padding: 14px;
+        margin: 0;
+      }
+      h1 { font-size: 15px; margin: 0 0 10px; }
+      label { display: block; font-size: 12px; margin-top: 10px; color: #444; }
+      input[type="number"], textarea {
+        width: 100%;
+        padding: 6px 8px;
+        font-size: 13px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-family: inherit;
+      }
+      textarea { resize: vertical; min-height: 64px; }
+      .mode {
+        display: flex;
+        gap: 12px;
+        margin-top: 6px;
+        font-size: 12px;
+      }
+      .mode label {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: 0;
+        cursor: pointer;
+      }
+      .row { display: flex; gap: 8px; margin-top: 12px; }
+      button {
+        flex: 1;
+        padding: 8px;
+        font-size: 13px;
+        border: 0;
+        border-radius: 6px;
+        background: #f29744;
+        color: #fff;
+        cursor: pointer;
+      }
+      button.secondary { background: #555; }
+      .saved { font-size: 11px; color: #2a8f3a; margin-top: 6px; min-height: 14px; }
+      .hint { font-size: 11px; color: #777; margin-top: 4px; }
+      #siteListWrap.disabled { opacity: 0.45; pointer-events: none; }
+
+      .countdown-card {
+        background: linear-gradient(135deg, #f29744, #e07a2a);
+        color: #fff;
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 4px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      }
+      .countdown-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.85;
+      }
+      .countdown-value {
+        font-size: 28px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        margin-top: 2px;
+        line-height: 1.1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🐱 Cat Break Reminder</h1>
+
+    <div class="countdown-card">
+      <div class="countdown-label">Next break in</div>
+      <div id="countdown" class="countdown-value">--:--</div>
+    </div>
+
+    <label>Break every (minutes)
+      <input id="intervalMin" type="number" min="1" max="180" />
+    </label>
+
+    <label>Break duration (seconds)
+      <input id="breakSec" type="number" min="5" max="600" />
+    </label>
+
+    <label style="margin-top: 14px;">Trigger on</label>
+    <div class="mode">
+      <label><input type="radio" name="siteMode" value="all" /> All pages</label>
+      <label><input type="radio" name="siteMode" value="list" /> Only these sites</label>
+    </div>
+
+    <div id="siteListWrap">
+      <label>Sites (one per line)
+        <textarea id="siteList" placeholder="twitter.com&#10;x.com&#10;youtube.com&#10;reddit.com"></textarea>
+      </label>
+      <div class="hint">Bare domains match the site and its subdomains.</div>
+    </div>
+
+    <div class="row">
+      <button id="save">Save</button>
+      <button id="test" class="secondary">Test now</button>
+    </div>
+    <div id="saved" class="saved"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>
